@@ -1,9 +1,10 @@
 modLoader="kotlinforforge" # 코틀린으로 neo-forge를 빌드하기 위한 모드로더
 
-loaderVersion="${loader_version_range}"
+loaderVersion="${loader_version_range}" # modLoader 버전
 
-license="${mod_license}"
+license="${mod_license}" # 모드 라이센스
 
+# 모드에 대한 기본 메타 데이터를 설정
 [[mods]]
 modId="${mod_id}"
 version="${mod_version}"
@@ -11,16 +12,18 @@ displayName="${mod_name}"
 authors="${mod_authors}"
 description='''${mod_description}'''
 
+# 해당 모드를 실행하기 위한 필수 요소를 정의
 [[dependencies.${mod_id}]]
     modId="neoforge"
     type="required"
     versionRange="${neo_version_range}"
-    ordering="NONE"
-    side="BOTH"
+    ordering="NONE" # 모드 로드 순서 설정 (현재 프로젝트에서는 필요없지만 추후 필요할 수도 있음)
+    side="BOTH" # 클라이언트와 서버 모두에서 실행
 
+# 해당 모드를 실행하기 위한 필수 요소를 정의
 [[dependencies.${mod_id}]]
     modId="minecraft"
     type="required"
     versionRange="${minecraft_version_range}"
-    ordering="NONE"
-    side="BOTH"
+    ordering="NONE" # 모드 로드 순서 설정 (현재 프로젝트에서는 필요없지만 추후 필요할 수도 있음)
+    side="BOTH" # 클라이언트와 서버 모두에서 실행
