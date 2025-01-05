@@ -1,4 +1,4 @@
-package com.example.minecrazy
+package org.minecrazy
 
 import com.mojang.logging.LogUtils
 import net.minecraft.client.Minecraft

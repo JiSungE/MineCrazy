@@ -1,4 +1,4 @@
-package com.example.minecrazy
+package org.minecrazy
 
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.resources.ResourceLocation
