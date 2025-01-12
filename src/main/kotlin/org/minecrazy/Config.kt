@@ -7,6 +7,7 @@ import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.EventBusSubscriber
 import net.neoforged.fml.event.config.ModConfigEvent
 import net.neoforged.neoforge.common.ModConfigSpec
+
 // 예제에 있는 Config임
 @EventBusSubscriber(modid = MineCrazyMod.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 object Config {
