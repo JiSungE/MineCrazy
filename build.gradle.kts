@@ -67,7 +67,7 @@ runs {
         // 네임스페이스는 게임 내에서 테스트에 사용할 수 있는 구역 또는 범위를 정의
         systemProperty("forge.enabledGameTestNamespaces", project.property("mod_id") as String)
 
-        programArguments.addAll("--username", "SunSaStar")
+        programArguments.addAll("--username", "Dev1")
     }
 
     // create("server"): 서버 환경을 정의
