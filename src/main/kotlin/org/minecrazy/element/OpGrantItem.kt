@@ -17,7 +17,7 @@ import org.minecrazy.MineCrazyMod
 
 object OpGrantItem {
     val OP_ITEM = MineCrazyMod.ITEMS.registerSimpleItem(
-        "OpGrantItem",
+        "op_grant_item",
         Item.Properties().stacksTo(1)
     )
 
