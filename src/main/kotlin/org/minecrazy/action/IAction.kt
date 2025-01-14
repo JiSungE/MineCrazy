@@ -1,5 +1,7 @@
 package org.minecrazy.action
 
+import net.neoforged.neoforge.client.event.InputEvent
+
 interface IAction {
-    fun execute()
+    fun execute(event: InputEvent.Key)
 }

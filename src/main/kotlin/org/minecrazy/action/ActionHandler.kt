@@ -14,7 +14,7 @@ object ActionHandler {
     @SubscribeEvent
     fun OnKeyInput(event: InputEvent.Key) {
         if(event.action == GLFW.GLFW_PRESS) {
-            KeyActions[event.key]?.execute()
+            KeyActions[event.key]?.execute(event)
         }
     }
 }
