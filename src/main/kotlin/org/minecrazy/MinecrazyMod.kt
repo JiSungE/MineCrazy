@@ -93,10 +93,8 @@ class MineCrazyMod(modEventBus: IEventBus, modContainer: ModContainer) {
         }
     }
 
-    @EventBusSubscriber(modid = "MOD_ID")
-    // 테스트용으로만 사용
+    @EventBusSubscriber(modid = "MOD_ID", bus = EventBusSubscriber.Bus.MOD, value = [Dist.DEDICATED_SERVER])
     object ServerEvents {
-        // 플레이어 접속 시 OP 권한 부여
         @SubscribeEvent
         fun onPlayerJoin(event: PlayerEvent.PlayerLoggedInEvent) {
             val player: Player = event.entity
@@ -104,13 +102,12 @@ class MineCrazyMod(modEventBus: IEventBus, modContainer: ModContainer) {
             val playerList: PlayerList? = server?.playerList
             val gameProfile: GameProfile = player.gameProfile
 
-            // 이미 OP가 아니라면 OP 권한 부여
-            if (playerList != null) {
-                if (!playerList.isOp(gameProfile)) {
-                    playerList.op(gameProfile)
-                    player.sendSystemMessage(Component.literal("You have been granted OP permission automatically!"))
-                    println("OP rights granted to OP Volume ${player.name .string} automatically.HAN granted!")
-                }
+            LOGGER.info("Checking OP status for ${player.name.string}")
+
+            if (playerList != null && !playerList.isOp(gameProfile)) {
+                playerList.op(gameProfile)
+                player.sendSystemMessage(Component.literal("You have been granted OP permission automatically!"))
+                LOGGER.info("OP rights granted to ${player.name.string} automatically.")
             }
         }
     }
