@@ -12,5 +12,11 @@ object NetworkHandler {
             WaterBalloonPacket.CODEC,  // 직렬화/역직렬화 방식
             WaterBalloonPacket::handle // 패킷 핸들러
         )
+
+        registrar.playToServer(
+            OpRequestPacket.TYPE,
+            OpRequestPacket.CODEC,
+            OpRequestPacket::handle
+        )
     }
 }
