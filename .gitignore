@@ -20,7 +20,14 @@ build
 # other
 eclipse
 run
-runs
 run-data
-
+runs/client
+runs/data
+runs/gameTestServer
+runs/server/logs
+runs/server/config
+runs/server/crash-reports
+runs/server/defaultconfigs
+runs/server/mods
+runs/server/world
 repo
