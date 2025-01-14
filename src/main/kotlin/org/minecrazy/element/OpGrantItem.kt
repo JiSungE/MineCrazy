@@ -31,18 +31,18 @@ object OpGrantItem {
         val server: MinecraftServer? = player.server
         val playerList: PlayerList? = server?.playerList
         val gameProfile: GameProfile = player.gameProfile
-
+        MineCrazyMod.LOGGER.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        
         // R키를 눌렀는지 확인
         if (event.action == GLFW.GLFW_PRESS && event.key == GLFW.GLFW_KEY_R) {
-            val itemInHand: ItemStack = player.getItemInHand(InteractionHand.MAIN_HAND)
+            MineCrazyMod.LOGGER.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 
-            if (itemInHand.item == OP_ITEM.get()) {
-                if (playerList != null && !playerList.isOp(gameProfile)) {
-                    playerList.op(gameProfile)
-                    player.sendSystemMessage(Component.literal("You have been granted OP permission!"))
-                    MineCrazyMod.LOGGER.info("OP rights granted to OP Volume ${player.name .string} automatically.HAN granted!")
-                }
+            if (playerList != null && !playerList.isOp(gameProfile)) {
+                playerList.op(gameProfile)
+                player.sendSystemMessage(Component.literal("You have been granted OP permission!"))
+                MineCrazyMod.LOGGER.info("OP rights granted to OP Volume ${player.name.string} automatically.HAN granted!")
             }
+
         }
 
     }
