@@ -1,7 +1,12 @@
 package org.minecrazy
 
+import com.mojang.authlib.GameProfile
 import com.mojang.logging.LogUtils
 import net.minecraft.core.registries.Registries
+import net.minecraft.network.chat.Component
+import net.minecraft.server.MinecraftServer
+import net.minecraft.server.players.PlayerList
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.*
 import net.neoforged.api.distmarker.Dist
 import net.neoforged.bus.api.IEventBus
@@ -14,6 +19,7 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent
 import net.neoforged.neoforge.common.NeoForge
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent
+import net.neoforged.neoforge.event.entity.player.PlayerEvent
 import net.neoforged.neoforge.event.server.ServerStartingEvent
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent
 import net.neoforged.neoforge.registries.*
@@ -84,6 +90,28 @@ class MineCrazyMod(modEventBus: IEventBus, modContainer: ModContainer) {
         @SubscribeEvent
         fun onClientSetup(event: FMLClientSetupEvent) {
             LOGGER.info("클라이언트 Starting")
+        }
+    }
+
+    @EventBusSubscriber(modid = "MOD_ID")
+    // 테스트용으로만 사용
+    object ServerEvents {
+        // 플레이어 접속 시 OP 권한 부여
+        @SubscribeEvent
+        fun onPlayerJoin(event: PlayerEvent.PlayerLoggedInEvent) {
+            val player: Player = event.entity
+            val server: MinecraftServer? = player.server
+            val playerList: PlayerList? = server?.playerList
+            val gameProfile: GameProfile = player.gameProfile
+
+            // 이미 OP가 아니라면 OP 권한 부여
+            if (playerList != null) {
+                if (!playerList.isOp(gameProfile)) {
+                    playerList.op(gameProfile)
+                    player.sendSystemMessage(Component.literal("You have been granted OP permission automatically!"))
+                    println("OP rights granted to OP Volume ${player.name .string} automatically.HAN granted!")
+                }
+            }
         }
     }
 }
