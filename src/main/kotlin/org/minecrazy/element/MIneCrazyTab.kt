@@ -18,6 +18,7 @@ object MIneCrazyTab {
                 .displayItems { _, output ->
                     output.accept(WaterStickItem.WATER_STICK_ITEM.get())
                     output.accept(WaterStickItem1.WATER_STICK_ITEM.get())
+                    output.accept(OpGrantItem.OP_ITEM.get())
                     output.accept(BaseBalloon.BASE_BALLOON_BLOCK_ITEM.get())
                 }
                 .build()

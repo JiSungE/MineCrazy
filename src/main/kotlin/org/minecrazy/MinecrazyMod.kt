@@ -1,12 +1,7 @@
 package org.minecrazy
 
-import com.mojang.authlib.GameProfile
 import com.mojang.logging.LogUtils
 import net.minecraft.core.registries.Registries
-import net.minecraft.network.chat.Component
-import net.minecraft.server.MinecraftServer
-import net.minecraft.server.players.PlayerList
-import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.*
 import net.neoforged.api.distmarker.Dist
 import net.neoforged.bus.api.IEventBus
@@ -19,14 +14,10 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent
 import net.neoforged.neoforge.common.NeoForge
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent
-import net.neoforged.neoforge.event.entity.player.PlayerEvent
 import net.neoforged.neoforge.event.server.ServerStartingEvent
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent
 import net.neoforged.neoforge.registries.*
-import org.minecrazy.element.BaseBalloon
-import org.minecrazy.element.MIneCrazyTab
-import org.minecrazy.element.WaterStickItem
-import org.minecrazy.element.WaterStickItem1
+import org.minecrazy.element.*
 import org.minecrazy.network.NetworkHandler
 
 @Mod(MineCrazyMod.MOD_ID)
@@ -54,6 +45,7 @@ class MineCrazyMod(modEventBus: IEventBus, modContainer: ModContainer) {
         // 각각의 객체가 자체적으로 관리하는 기능들을 Setup
         WaterStickItem.register(modEventBus)
         WaterStickItem1.register(modEventBus)
+        OpGrantItem.register(modEventBus)
         BaseBalloon.register(modEventBus)
         MIneCrazyTab.register(modEventBus)
 
@@ -71,6 +63,7 @@ class MineCrazyMod(modEventBus: IEventBus, modContainer: ModContainer) {
         if (event.tabKey == CreativeModeTabs.BUILDING_BLOCKS) {
             event.accept(WaterStickItem.WATER_STICK_ITEM)
             event.accept(WaterStickItem1.WATER_STICK_ITEM)
+            event.accept(OpGrantItem.OP_ITEM)
             event.accept(BaseBalloon.BASE_BALLOON_BLOCK_ITEM)
         }
     }
@@ -90,25 +83,6 @@ class MineCrazyMod(modEventBus: IEventBus, modContainer: ModContainer) {
         @SubscribeEvent
         fun onClientSetup(event: FMLClientSetupEvent) {
             LOGGER.info("클라이언트 Starting")
-        }
-    }
-
-    @EventBusSubscriber(modid = "MOD_ID", bus = EventBusSubscriber.Bus.MOD, value = [Dist.DEDICATED_SERVER])
-    object ServerEvents {
-        @SubscribeEvent
-        fun onPlayerJoin(event: PlayerEvent.PlayerLoggedInEvent) {
-            val player: Player = event.entity
-            val server: MinecraftServer? = player.server
-            val playerList: PlayerList? = server?.playerList
-            val gameProfile: GameProfile = player.gameProfile
-
-            LOGGER.info("Checking OP status for ${player.name.string}")
-
-            if (playerList != null && !playerList.isOp(gameProfile)) {
-                playerList.op(gameProfile)
-                player.sendSystemMessage(Component.literal("You have been granted OP permission automatically!"))
-                LOGGER.info("OP rights granted to ${player.name.string} automatically.")
-            }
         }
     }
 }
