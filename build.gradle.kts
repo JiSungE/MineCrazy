@@ -66,6 +66,8 @@ runs {
         // 모드 ID를 기준으로 테스트 네임스페이스를 활성화
         // 네임스페이스는 게임 내에서 테스트에 사용할 수 있는 구역 또는 범위를 정의
         systemProperty("forge.enabledGameTestNamespaces", project.property("mod_id") as String)
+
+        programArguments.addAll("--username", "JISUNG")
     }
 
     // create("server"): 서버 환경을 정의
