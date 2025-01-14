@@ -11,6 +11,7 @@ import net.neoforged.neoforge.network.PacketDistributor
 import net.neoforged.neoforge.common.NeoForge
 import org.lwjgl.glfw.GLFW
 import org.minecrazy.MineCrazyMod
+import org.minecrazy.balloon.WaterBalloon
 import org.minecrazy.network.WaterBalloonPacket
 
 object WaterStickItem {
