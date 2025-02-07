@@ -17,9 +17,7 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent
 import net.neoforged.neoforge.event.server.ServerStartingEvent
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent
 import net.neoforged.neoforge.registries.*
-import org.minecrazy.element.BaseBalloon
-import org.minecrazy.element.MIneCrazyTab
-import org.minecrazy.element.WaterStickItem
+import org.minecrazy.element.*
 import org.minecrazy.network.NetworkHandler
 
 @Mod(MineCrazyMod.MOD_ID)
@@ -46,6 +44,8 @@ class MineCrazyMod(modEventBus: IEventBus, modContainer: ModContainer) {
 
         // 각각의 객체가 자체적으로 관리하는 기능들을 Setup
         WaterStickItem.register(modEventBus)
+        WaterStickItem1.register(modEventBus)
+        OpGrantItem.register(modEventBus)
         BaseBalloon.register(modEventBus)
         MIneCrazyTab.register(modEventBus)
 
@@ -62,6 +62,8 @@ class MineCrazyMod(modEventBus: IEventBus, modContainer: ModContainer) {
     private fun addCreative(event: BuildCreativeModeTabContentsEvent) {
         if (event.tabKey == CreativeModeTabs.BUILDING_BLOCKS) {
             event.accept(WaterStickItem.WATER_STICK_ITEM)
+            event.accept(WaterStickItem1.WATER_STICK_ITEM)
+            event.accept(OpGrantItem.OP_ITEM)
             event.accept(BaseBalloon.BASE_BALLOON_BLOCK_ITEM)
         }
     }
